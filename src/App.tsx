@@ -1,4 +1,11 @@
 import React from "react";
+
+//Interfaces
+import { ITask } from "./interfaces/Task";
+
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
+
 import "./App.css";
 
 //Components
@@ -7,8 +14,6 @@ import Footer from "./components/Footer";
 
 //Style
 import styles from "./App.module.css";
-import TaskForm from "./components/TaskForm";
-import TaskList from "./components/TaskList";
 
 function App() {
   return (
