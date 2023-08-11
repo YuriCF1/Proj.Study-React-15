@@ -17,6 +17,14 @@ import styles from "./App.module.css";
 function App() {
   const [taskList, setTaskList] = useState<ITask[]>([]);
 
+  const deleTask = (id: number) => {
+    setTaskList(
+      taskList.filter((tasks) => {
+        return tasks.id !== id;
+      })
+    );
+  };
+
   return (
     <>
       <Header />
@@ -31,7 +39,7 @@ function App() {
         </div>
         <div>
           <h2>Suas tarefas</h2>
-          <TaskList taskList={taskList} />
+          <TaskList taskList={taskList} handleDelete={deleTask} />
         </div>
       </main>
       <Footer />
