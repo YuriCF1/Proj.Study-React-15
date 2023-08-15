@@ -26,6 +26,19 @@ function App() {
     );
   };
 
+  const toggleModal = (display: boolean) => {
+    const modal = document.querySelector("#modal");
+    if (display) {
+      modal!.classList.remove("hide");
+    } else {
+      modal!.classList.add("hide");
+    }
+  };
+
+  const editTask = () => {
+    toggleModal(true);
+  };
+
   return (
     <>
       <Modal
@@ -43,7 +56,11 @@ function App() {
         </div>
         <div>
           <h2>Suas tarefas</h2>
-          <TaskList taskList={taskList} handleDelete={deleTask} />
+          <TaskList
+            taskList={taskList}
+            handleDelete={deleTask}
+            handleEdit={editTask}
+          />
         </div>
       </main>
       <Footer />
