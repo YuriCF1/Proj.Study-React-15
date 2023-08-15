@@ -28,3 +28,16 @@
 .modal form {
   width: 90%;
 }
+
+.headerModal {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 3em;
+}
+
+.headerModal i {
+  border: 2px solid #000;
+  cursor: pointer;
+  max-height: 1em;
+  font-size: 1.5em;
+}
