@@ -17,6 +17,7 @@ import styles from "./App.module.css";
 
 function App() {
   const [taskList, setTaskList] = useState<ITask[]>([]);
+  const [taskToUpdate, setTaskToUpdate] = useState<ITask | null>(null);
 
   const deleTask = (id: number) => {
     setTaskList(
@@ -35,14 +36,22 @@ function App() {
     }
   };
 
-  const editTask = () => {
+  const editTask = (task: ITask) => {
     toggleModal(true);
+    setTaskToUpdate(task);
+    console.log(task);
   };
 
   return (
     <>
       <Modal
-        children={<TaskForm btnText="Editar tarefa" taskList={taskList} />}
+        children={
+          <TaskForm
+            btnText="Editar tarefa"
+            taskList={taskList}
+            task={taskToUpdate}
+          />
+        }
       />
       <Header />
       <main className={styles.main}>
