@@ -15,7 +15,7 @@ const Modal = ({ children }: Props) => {
   };
 
   return (
-    <div id="modal">
+    <div id="modal" className="hide">
       <div className={style.fade}></div>
       <div className={style.modal}>
         <div className={style.headerModal}>
