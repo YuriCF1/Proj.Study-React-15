@@ -10,16 +10,25 @@ type Props = {
   btnText: string;
   taskList: ITask[];
   setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>; //Não é obrigatório pois pode ser um form de edição
+  task?: ITask | null; //Aceita valores null, apenas quando inicia
 };
 
 // interface Props {
 //   btnText: string;
 // }
 
-const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
+const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
   const [id, setId] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [difficulty, setDifficulty] = useState<number>(0);
+
+  useEffect(() => {
+    if (task) {
+      setId(task.id);
+      setTitle(task.title);
+      setDifficulty(task.difficulty);
+    }
+  }, [task]);
 
   function addTaskHandler(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault();
