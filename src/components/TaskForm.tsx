@@ -11,13 +11,20 @@ type Props = {
   taskList: ITask[];
   setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>; //Não é obrigatório pois pode ser um form de edição
   task?: ITask | null; //Aceita valores null, apenas quando inicia
+  handleUpdate?(id: number, title: string, difficulty: number): void; //Função não retornada, é void. Não null
 };
 
 // interface Props {
 //   btnText: string;
 // }
 
-const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
+const TaskForm = ({
+  btnText,
+  taskList,
+  setTaskList,
+  task,
+  handleUpdate,
+}: Props) => {
   const [id, setId] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [difficulty, setDifficulty] = useState<number>(0);
@@ -33,16 +40,17 @@ const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
   function addTaskHandler(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    const id = Math.floor(Math.random() * 1000);
+    if (handleUpdate) {
+      handleUpdate(id, title, difficulty);
+    } else {
+      const id = Math.floor(Math.random() * 1000);
+      const newTask: ITask = { id, title, difficulty };
 
-    const newTask: ITask = { id, title, difficulty };
+      setTaskList!([...taskList, newTask]);
 
-    setTaskList!([...taskList, newTask]);
-
-    setTitle("");
-    setDifficulty(0);
-
-    console.log(taskList);
+      setTitle("");
+      setDifficulty(0);
+    }
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
