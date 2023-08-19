@@ -27,7 +27,7 @@ function App() {
     );
   };
 
-  const toggleModal = (display: boolean) => {
+  const showingModal = (display: boolean) => {
     const modal = document.querySelector("#modal");
     if (display) {
       modal!.classList.remove("hide");
@@ -37,9 +37,25 @@ function App() {
   };
 
   const editTask = (task: ITask) => {
-    toggleModal(true);
+    showingModal(true);
     setTaskToUpdate(task);
     console.log(task);
+  };
+
+  const updateTask = (id: number, title: string, difficulty: number) => {
+    const updatedTask: ITask = {
+      //JS já entende pelos nomes iguais
+      id,
+      title,
+      difficulty,
+    };
+
+    const updatedItems = taskList.map((task) => {
+      return task.id === updatedTask.id ? updatedTask : task;
+    });
+
+    setTaskList(updatedItems);
+    showingModal(false);
   };
 
   return (
@@ -50,6 +66,7 @@ function App() {
             btnText="Editar tarefa"
             taskList={taskList}
             task={taskToUpdate}
+            handleUpdate={updateTask}
           />
         }
       />
