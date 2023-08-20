@@ -8,9 +8,7 @@ type Props = {
 
 const Modal = ({ children }: Props) => {
   const closeModal = (e: React.MouseEvent): void => {
-    console.log("Clicado");
     const xClose = document.querySelector("#xClose");
-    console.log(xClose);
     xClose!.parentElement!.parentElement!.parentElement!.classList.add("hide");
   };
 
